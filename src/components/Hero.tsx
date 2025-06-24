@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 // import LoginModal from './LoginModal';
 
 const animalSymbols = [
@@ -13,7 +13,7 @@ const animalSymbols = [
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // const [loginOpen, setLoginOpen]         = useState(false);
   const [currentAnimal, setCurrentAnimal] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -30,12 +30,8 @@ const Hero: React.FC = () => {
   }, []);
 
   const handleStartExhibition = () => {
-    // if (user) {
-    //   navigate('/create-exhibition');
-    // } else {
-    //   setLoginOpen(true);
-    // }
-    // Direct navigation without auth check
+    // Completely bypass any authentication - direct navigation
+    console.log('Navigating directly to create exhibition - authentication disabled');
     navigate('/create-exhibition');
   };
 
@@ -158,12 +154,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Commented out LoginModal */}
-      {/* <LoginModal
-        open={loginOpen}
-        onClose={() => setLoginOpen(false)}
-        onSuccess={() => navigate('/create-exhibition')}
-      /> */}
+      {/* Completely removed LoginModal */}
     </section>
   );
 };

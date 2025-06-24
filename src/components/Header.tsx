@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Palette } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
 // import LoginModal from './LoginModal';
 
 interface HeaderProps {
@@ -11,11 +11,15 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome }) => {
-  const [isMenuOpen, setIsMenuOpen]   = useState(false);
-  // const [loginOpen, setLoginOpen]     = useState(false);
-  const navigate                      = useNavigate();
-  const location                      = useLocation();
-  const { user, loading, logout }     = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const { user, loading, logout } = useAuth();
+
+  // Mock user state for UI purposes
+  const user = { name: 'Mock User' };
+  const loading = false;
+  const logout = () => console.log('Logout disabled - authentication commented out');
 
   const handleLogoClick = () => {
     if (
@@ -100,7 +104,7 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
             </button>
           </nav>
 
-          {/* Auth Buttons - Commented out login modal functionality */}
+          {/* Auth Buttons - Completely disabled */}
           <div className="hidden md:flex items-center space-x-4">
             {loading ? (
               <div className="w-6 h-6 border-2 border-purple-500 rounded-full animate-spin" />
@@ -113,7 +117,6 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
               </button>
             ) : (
               <button
-                // onClick={() => setLoginOpen(true)}
                 onClick={() => console.log('Login disabled - authentication commented out')}
                 className="text-gray-300 hover:text-white transition-colors"
               >
@@ -121,12 +124,10 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
               </button>
             )}
             <button
-              onClick={() =>
-                // user
-                //   ? navigate('/create-exhibition')
-                //   : setLoginOpen(true)
-                navigate('/create-exhibition') // Direct navigation without auth check
-              }
+              onClick={() => {
+                console.log('Direct navigation to create exhibition - no auth required');
+                navigate('/create-exhibition');
+              }}
               className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full font-medium hover:from-purple-500 hover:to-pink-500 transition-all transform hover:scale-105"
             >
               Get Started (Beta)
@@ -188,7 +189,6 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
                   </button>
                 ) : (
                   <button
-                    // onClick={() => setLoginOpen(true)}
                     onClick={() => console.log('Login disabled - authentication commented out')}
                     className="text-gray-300 hover:text-white text-left"
                   >
@@ -196,12 +196,10 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
                   </button>
                 )}
                 <button
-                  onClick={() =>
-                    // user
-                    //   ? navigate('/create-exhibition')
-                    //   : setLoginOpen(true)
-                    navigate('/create-exhibition') // Direct navigation without auth check
-                  }
+                  onClick={() => {
+                    console.log('Direct navigation to create exhibition - no auth required');
+                    navigate('/create-exhibition');
+                  }}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full font-medium hover:from-purple-500 hover:to-pink-500 transition-all"
                 >
                   Get Started (Beta)
@@ -210,9 +208,6 @@ const Header: React.FC<HeaderProps> = ({ hasUnsavedData = false, onNavigateHome 
             </div>
           </div>
         )}
-
-        {/* Commented out LoginModal */}
-        {/* <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} /> */}
       </div>
     </header>
   );

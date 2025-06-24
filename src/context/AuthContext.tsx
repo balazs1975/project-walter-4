@@ -1,5 +1,6 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
+// Completely commented out Firebase imports
 // import {
 //   User,
 //   onAuthStateChanged,
@@ -20,28 +21,38 @@ const Ctx = createContext<AuthCtx | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // Mock user as logged in to bypass authentication
-  const [user, setUser] = useState<any>({ uid: 'mock-user', email: 'user@example.com' });
-  const [loading, setLoading] = useState(false); // Set to false since we're mocking
+  // Mock user as always logged in to completely bypass authentication
+  const [user, setUser] = useState<any>({ 
+    uid: 'mock-user-123', 
+    email: 'user@example.com',
+    displayName: 'Mock User'
+  });
+  const [loading, setLoading] = useState(false); // Never loading since we're mocking
 
-  // Comment out Firebase auth state listener
+  // Completely commented out Firebase auth state listener
   // useEffect(
   //   () => onAuthStateChanged(auth, u => { setUser(u); setLoading(false); }),
   //   [],
   // );
 
-  // Mock login function
+  // Mock login function - no actual authentication
   const login = async () => {
+    console.log('Mock login called - authentication completely disabled');
     // return signInWithPopup(auth, provider).then(() => void 0);
-    console.log('Mock login - authentication disabled');
-    setUser({ uid: 'mock-user', email: 'user@example.com' });
+    setUser({ 
+      uid: 'mock-user-123', 
+      email: 'user@example.com',
+      displayName: 'Mock User'
+    });
+    return Promise.resolve();
   };
 
   // Mock logout function
   const logout = async () => {
+    console.log('Mock logout called - authentication completely disabled');
     // return signOut(auth).then(() => void 0);
-    console.log('Mock logout - authentication disabled');
     setUser(null);
+    return Promise.resolve();
   };
 
   return (
